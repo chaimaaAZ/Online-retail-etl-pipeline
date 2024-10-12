@@ -1,0 +1,23 @@
+
+checks for FACT_INVOICES:
+  - schema:
+      fail:
+        when required column missing: 
+          [INVOICE_ID, PRODUCT_ID, CUSTOMER_ID, DATETIME_ID, QUANTITY, TOTAL]
+        when wrong column type:
+          INVOICE_ID: string
+          PRODUCT_ID: string
+          CUSTOMER_ID: string
+          DATETIME_ID: string
+          QUANTITY: int
+          TOTAL: float
+  # Check fails when NULL values in the column
+  - missing_count(INVOICE_ID) = 0:
+      name: All invoices have a key
+  # Check fails when the total of any invoices is negative
+  - failed rows:
+      name: All invoices have a positive total amount
+      fail query: |
+        SELECT invoice_id, total
+        FROM fact_invoices
+        WHERE total < 0

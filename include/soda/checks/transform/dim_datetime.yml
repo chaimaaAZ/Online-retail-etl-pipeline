@@ -1,0 +1,13 @@
+checks for dim_datetime:
+  - schema:
+      fail:
+        when required column missing:  [DATETIME_ID, DATETIME]
+        when wrong column type:
+            DATETIME_ID: string
+            DATETIME: timestamp
+  - duplicate_count(DATETIME_ID) = 0: 
+      name: All datetimes are unique
+  - invalid_count(weekday) = 0:
+      name: All weekdays are in range 0-6
+      valid min: 0
+      valid max: 6
