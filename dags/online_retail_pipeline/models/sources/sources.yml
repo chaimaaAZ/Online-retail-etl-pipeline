@@ -1,0 +1,9 @@
+version: 2
+
+sources: 
+  - name: online_retail_pipeline
+    database: online_retail_db
+    schema: online_retail_schema
+    tables: 
+      - name: raw_invoices
+      - name: "country"

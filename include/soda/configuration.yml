@@ -1,0 +1,16 @@
+data_source retail:
+  type: snowflake
+  username: 'chaimaa'
+  password: ''
+  account: ''
+  database: 'online_retail_db'
+  warehouse: 'online_retail_wh'
+  connection_timeout: 240
+  role: 'st_online_retail'
+  client_session_keep_alive: true
+  schema: 'online_retail_schema'
+
+soda_cloud:
+  host: 
+  api_key_id:
+  api_key_secret: 
