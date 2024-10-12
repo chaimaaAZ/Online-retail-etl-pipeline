@@ -93,6 +93,10 @@ def check_raw_data(scan_name='check_load', check_subpath='sources'):
     return check(scan_name,check_subpath)
 
 
+def check_dim_fact_data(scan_name='check_load', check_subpath='transform'):
+    return check(scan_name,check_subpath)
+
+
 
 with DAG(
     dag_id="retail",
@@ -132,5 +136,25 @@ with DAG(
             select=['path:models/transform']
         )
     )
+    check_transform_data = PythonOperator(
+           task_id='soda_check_transform_data',
+           python_callable = check_dim_fact_data
+    )
+    create_report_tables_with_dbt = DbtTaskGroup(
+        group_id='create_report_tables_with_dbt',
+        project_config=ProjectConfig(dbt_project_path="/usr/local/airflow/dags/dbt/online_retail_pipeline"),
+        profile_config=profile_config,
+        execution_config=ExecutionConfig(
+        dbt_executable_path="/usr/local/airflow/dbt_venv2/bin/dbt"  # Ensure this path is correct
+        ),
+        render_config=RenderConfig(
+            load_method=LoadMode.DBT_LS,
+            select=['path:models/reporting']
+        )
+    )
 
-load_file_to_staging >> raw_to_table >> raw_data_soda_check >> dbt_create_dim_fact_tables_tag
+
+load_file_to_staging >> raw_to_table >> raw_data_soda_check >> dbt_create_dim_fact_tables_tag >> check_transform_data >> create_report_tables_with_dbt
+
+
+
