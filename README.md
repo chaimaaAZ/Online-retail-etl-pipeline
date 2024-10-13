@@ -48,6 +48,8 @@ You can find the detailed information on the diagram below:
 
 ![online_retail_pipeline](https://github.com/user-attachments/assets/8313de58-37c8-482d-8e4b-e166b64b4061)
 
+:name_badge: Fun fact: i used diagrams library in python to generate this diagram
+
 ### 🔧 Pipeline on Airflow
 ![dbt_dag](https://github.com/user-attachments/assets/7ddd4f82-3660-4bd1-b77c-0e3b242e936a)
 
