@@ -42,7 +42,7 @@ The end-to-end data pipeline includes the following steps:
 - Moving the data from the lake to  Database
 - Transforming the data in the Data Warehouse and preparing it for the dashboard *(dbt)*
 - Checking the quality of the data in the Data Warehouse *(Soda)*
-- Creating the dashboard *(Looker Studio)*
+- Creating the dashboard *(PowerBI)*
   
 You can find the detailed information on the diagram below:
 
